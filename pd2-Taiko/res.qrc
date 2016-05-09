@@ -1,0 +1,15 @@
+<RCC>
+    <qresource prefix="/pic">
+        <file>pic/Drum1.jpg</file>
+        <file>pic/Drum2.jpg</file>
+        <file>pic/GameBackDrum.jpg</file>
+        <file>pic/GameBackGround.jpg</file>
+        <file>pic/StartMenu.jpg</file>
+    </qresource>
+    <qresource prefix="/sound">
+        <file>sound/background.mp3</file>
+        <file>sound/drum_dong.wav</file>
+        <file>sound/drum_ka.wav</file>
+        <file>sound/startSound.mp3</file>
+    </qresource>
+</RCC>
