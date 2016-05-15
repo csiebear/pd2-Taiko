@@ -17,6 +17,8 @@ public:
     void scoreboardChange(QString score);
     ~Dialog();
 
+private slots:
+
 private:
     Ui::Dialog *ui;
 };

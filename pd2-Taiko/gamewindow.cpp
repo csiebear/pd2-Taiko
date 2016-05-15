@@ -20,12 +20,13 @@ gameWindow::gameWindow(QWidget *parent) :
     this->setWindowTitle("太鼓達人(Beta 1.0)");
     isIni=0;
     count=0;
-    P1.load(":/pic/pic/P1.png");
+    P1.load(":/pic/pic/P1.png");//load the picture for animation
     P2.load(":/pic/pic/P2.png");
     P3.load(":/pic/pic/P3.png");
     mainTimer = new QTimer(this);
     connect(mainTimer , SIGNAL(timeout()) , this , SLOT( lcdTimeChange()) );
     mainTimer->start(100);
+
     if(isIni==0)
         ini();
 }
@@ -83,17 +84,18 @@ void gameWindow::finish()
     mainMusic->stop();
 
     Dialog scoreDialog;
-    score=10;//for test
     scoreDialog.scoreboardChange(QString::number(score,10));
     scoreDialog.setWindowTitle("最終成績");
     scoreDialog.setModal(true);
     scoreDialog.exec();
+
 }
 
 void gameWindow::ini()
 {
+
     isIni=1;
-    x=478;
+    x=150;//the DrumLine starting position x at the 100 pixel
     timer = new QTimer(this);
     timer2 = new QTimer(this);
     QDateTime startTime=QDateTime::currentDateTime();
@@ -104,12 +106,13 @@ void gameWindow::ini()
 
     //30sec (30*1000 ms) set the timer2 timeout and pop out the dialog
     connect(timer2 , SIGNAL(timeout()) , this , SLOT( finish() ) );
-    timer2->start(30000);
+    timer2->start(32000);
 
     //for testing the scoreboard dialog is showing or not
     //timer2->start(2000);
 
-    F_hittime=0;
+    wrongHitTime=0;
+    rightHitTime=0;
     ui->lcd_scoreboard->setPalette(Qt::black);
     ui->lcd_timeboard->setPalette(Qt::black);
     ui->lcd_hittime->setPalette(Qt::white);
@@ -122,17 +125,90 @@ void gameWindow::ini()
     mainMusic->setMedia(QUrl("qrc:sound/sound/background.mp3"));
     mainMusic->play();
 
+    //initialize the array (red/blue)BeingHit
+    for(int i=0;i<=7;i++)
+        redBeingHit[i]=false;
+    for(int i=0;i<=2;i++)
+        blueBeingHit[i]=false;
+
     score=0;
 }
 
-void gameWindow::redHitCheck(int Pos)
+void gameWindow::restart()
 {
+    timer->stop();
+    timer2->stop();
+    mainTimer->stop();
+    count=0;//reset the mainTimer
+    mainMusic->stop();//stop the muisc
+
+    score=0;
+    wrongHitTime=0;
+    rightHitTime=0;
+
+    mainTimer = new QTimer(this);
+    connect(mainTimer , SIGNAL(timeout()) , this , SLOT( lcdTimeChange()) );
+    mainTimer->start(100);
+
+    isIni=1;
+    x=150;//the DrumLine starting position x at the 100 pixel
+    timer = new QTimer(this);
+    timer2 = new QTimer(this);
+    QDateTime startTime=QDateTime::currentDateTime();
+    //0.1 sec(100 ms) change the timer and refresh the key pad
+    connect(timer , SIGNAL(timeout()) , this , SLOT( refresh()) );
+    connect(timer , SIGNAL(timeout()) , this , SLOT( lcdScoreChange()) );
+    timer->start(100);
+
+    //30sec (30*1000 ms) set the timer2 timeout and pop out the dialog
+    connect(timer2 , SIGNAL(timeout()) , this , SLOT( finish() ) );
+    timer2->start(32000);
+
+    ui->lcd_scoreboard->setPalette(Qt::black);
+    ui->lcd_timeboard->setPalette(Qt::black);
+    ui->lcd_hittime->setPalette(Qt::white);
+    QPalette whiteText;
+    whiteText.setColor(QPalette::WindowText,Qt::white);
+    ui->HitandMiss->setPalette(whiteText);
+
+    //create the media player for playing the sound
+    mainMusic  = new QMediaPlayer();
+    mainMusic->setMedia(QUrl("qrc:sound/sound/background.mp3"));
+    mainMusic->play();
+
+    //reset the array (red/blue)BeingHit
+    for(int i=0;i<=7;i++)
+        redBeingHit[i]=false;
+    for(int i=0;i<=2;i++)
+        blueBeingHit[i]=false;
+
 
 }
 
-void gameWindow::blueHitCheck(int Pos)
+int gameWindow::redHitCheck(int Pos)
 {
+    int hitOrNot=0;
+    //check the 8 drum
+    for(int i=0;i<=8;i++){
+        if((redBeingHit[i]==false) && (Pos+redPox[i])<=40 && (Pos+redPox[i])>=20){
+            hitOrNot++;
+            redBeingHit[i]=true;
+        }
+    }
+    return hitOrNot;
+}
 
+int gameWindow::blueHitCheck(int Pos)
+{
+    int hitOrNot=0;
+    //check the 3 drum
+    for(int i=0;i<=2;i++){
+        if((blueBeingHit[i]==false) && (Pos+bluePox[i])<=40 && (Pos+bluePox[i])>=20){
+            hitOrNot++;
+            blueBeingHit[i]=true;
+        }
+    }
+    return hitOrNot;
 }
 
 void gameWindow::keyPressEvent(QKeyEvent * event)
@@ -148,8 +224,15 @@ void gameWindow::keyPressEvent(QKeyEvent * event)
         case Qt::Key_F:
             ui->label_Key_F->setPalette(sample_palette);
             ui->HitDrum->show();//The QLabel showing ,and it means the drum being hit
-            F_hittime++;
-            ui->lcd_hittime->display(F_hittime);
+
+            if(redHitCheck(x)==1){
+                score++;
+                rightHitTime++;
+                ui->lcd_hittime->display(rightHitTime);
+            }else{
+                wrongHitTime++;
+                ui->lcd_wrongHitTime->display(wrongHitTime);
+            }
             punchsound->setMedia(QUrl("qrc:sound/sound/drum_dong.wav"));
             punchsound->play();
             break;
@@ -157,7 +240,15 @@ void gameWindow::keyPressEvent(QKeyEvent * event)
         case Qt::Key_J:
             ui->label_Key_J->setPalette(sample_palette);
             ui->HitDrum->show();//The QLabel showing ,and it means the drum being hit
-            J_hittime++;
+
+            if(blueHitCheck(x)==1){
+                score++;
+                rightHitTime++;
+                ui->lcd_hittime->display(rightHitTime);
+            }else{
+                wrongHitTime++;
+                ui->lcd_wrongHitTime->display(wrongHitTime);
+            }
             punchsound->setMedia(QUrl("qrc:sound/sound/drum_dong.wav"));
             punchsound->play();
             break;
@@ -166,3 +257,8 @@ void gameWindow::keyPressEvent(QKeyEvent * event)
     }
 }
 
+
+void gameWindow::on_pushButton_2_clicked()
+{
+    restart();
+}

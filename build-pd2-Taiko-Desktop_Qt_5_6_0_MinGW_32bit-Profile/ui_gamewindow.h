@@ -37,6 +37,8 @@ public:
     QLabel *DrumLine;
     QLabel *taikoAnimate;
     QLabel *HitDrum;
+    QLCDNumber *lcd_wrongHitTime;
+    QPushButton *pushButton_2;
 
     void setupUi(QWidget *gameWindow)
     {
@@ -104,7 +106,7 @@ public:
         label_Key_J->setAlignment(Qt::AlignCenter);
         lcd_hittime = new QLCDNumber(gameWindow);
         lcd_hittime->setObjectName(QStringLiteral("lcd_hittime"));
-        lcd_hittime->setGeometry(QRect(400, 164, 75, 35));
+        lcd_hittime->setGeometry(QRect(360, 194, 75, 35));
         lcd_hittime->setSizeIncrement(QSize(0, 0));
         lcd_hittime->setFont(font);
         lcd_hittime->setContextMenuPolicy(Qt::DefaultContextMenu);
@@ -140,7 +142,7 @@ public:
         ScoreTitle->setFont(font1);
         HitandMiss = new QLabel(gameWindow);
         HitandMiss->setObjectName(QStringLiteral("HitandMiss"));
-        HitandMiss->setGeometry(QRect(330, 164, 50, 35));
+        HitandMiss->setGeometry(QRect(330, 164, 141, 35));
         HitandMiss->setFont(font1);
         DrumLine = new QLabel(gameWindow);
         DrumLine->setObjectName(QStringLiteral("DrumLine"));
@@ -153,6 +155,24 @@ public:
         HitDrum->setObjectName(QStringLiteral("HitDrum"));
         HitDrum->setGeometry(QRect(-8, 87, 91, 61));
         HitDrum->setPixmap(QPixmap(QString::fromUtf8(":/pic/pic/hitdrum.png")));
+        lcd_wrongHitTime = new QLCDNumber(gameWindow);
+        lcd_wrongHitTime->setObjectName(QStringLiteral("lcd_wrongHitTime"));
+        lcd_wrongHitTime->setGeometry(QRect(400, 194, 75, 35));
+        lcd_wrongHitTime->setSizeIncrement(QSize(0, 0));
+        lcd_wrongHitTime->setFont(font);
+        lcd_wrongHitTime->setContextMenuPolicy(Qt::DefaultContextMenu);
+        lcd_wrongHitTime->setAcceptDrops(false);
+        lcd_wrongHitTime->setFrameShape(QFrame::Box);
+        lcd_wrongHitTime->setFrameShadow(QFrame::Plain);
+        lcd_wrongHitTime->setLineWidth(2);
+        lcd_wrongHitTime->setMidLineWidth(0);
+        lcd_wrongHitTime->setSmallDecimalPoint(false);
+        lcd_wrongHitTime->setDigitCount(8);
+        lcd_wrongHitTime->setMode(QLCDNumber::Dec);
+        pushButton_2 = new QPushButton(gameWindow);
+        pushButton_2->setObjectName(QStringLiteral("pushButton_2"));
+        pushButton_2->setGeometry(QRect(5, 290, 75, 25));
+        pushButton_2->setFont(font1);
 
         retranslateUi(gameWindow);
         QObject::connect(pushButton, SIGNAL(clicked()), background, SLOT(clear()));
@@ -169,10 +189,11 @@ public:
         label_Key_J->setText(QApplication::translate("gameWindow", "J", 0));
         TimeTitle->setText(QApplication::translate("gameWindow", "Time:", 0));
         ScoreTitle->setText(QApplication::translate("gameWindow", "Score:", 0));
-        HitandMiss->setText(QApplication::translate("gameWindow", "Hit:", 0));
+        HitandMiss->setText(QApplication::translate("gameWindow", "Right/Wrong", 0));
         DrumLine->setText(QString());
         taikoAnimate->setText(QString());
         HitDrum->setText(QString());
+        pushButton_2->setText(QApplication::translate("gameWindow", "\345\206\215\347\216\251\344\270\200\346\254\241", 0));
     } // retranslateUi
 
 };

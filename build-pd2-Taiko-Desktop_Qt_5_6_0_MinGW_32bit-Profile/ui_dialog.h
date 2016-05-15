@@ -38,7 +38,7 @@ public:
         pushButton->setGeometry(QRect(80, 210, 100, 25));
         pushButton_2 = new QPushButton(Dialog);
         pushButton_2->setObjectName(QStringLiteral("pushButton_2"));
-        pushButton_2->setGeometry(QRect(200, 210, 100, 25));
+        pushButton_2->setGeometry(QRect(220, 210, 100, 25));
         Score = new QLabel(Dialog);
         Score->setObjectName(QStringLiteral("Score"));
         Score->setGeometry(QRect(80, 60, 100, 45));
@@ -54,6 +54,7 @@ public:
         outputScore->setAlignment(Qt::AlignCenter);
 
         retranslateUi(Dialog);
+        QObject::connect(pushButton_2, SIGNAL(clicked()), Dialog, SLOT(close()));
 
         QMetaObject::connectSlotsByName(Dialog);
     } // setupUi
