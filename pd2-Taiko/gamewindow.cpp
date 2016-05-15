@@ -89,7 +89,6 @@ void gameWindow::finish()
     scoreDialog.setWindowTitle("最終成績");
     scoreDialog.setModal(true);
     scoreDialog.exec();
-
 }
 
 void gameWindow::ini()

@@ -18,7 +18,6 @@ class gameWindow : public QWidget
 
 public:
     explicit gameWindow(QWidget *parent = 0);
-    void moveDrum();
     ~gameWindow();
 
 
@@ -28,8 +27,6 @@ private slots:
     void lcdScoreChange();
     void finish();
     void refresh();
-    int redHitCheck(int Pos);
-    int blueHitCheck(int Pos);
     void keyPressEvent(QKeyEvent *);
     void ini();
     void on_pushButton_2_clicked();
@@ -45,10 +42,9 @@ private:
     int rightHitTime;
     int numberOfDrum;
     int isIni;
-    void showTheDrum();
-    void moveTheDrum();
-    void setDrum();
     void restart();
+    int redHitCheck(int Pos);
+    int blueHitCheck(int Pos);
     QPalette sample_palette;
     QMediaPlayer * mainMusic;
     QMediaPlayer * startSound;

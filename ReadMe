@@ -1,0 +1,99 @@
+Project-Taiko(太鼓達人)
+學生：李碩軒
+學號：F74004101
+作業要求：
+兩個按鍵來控制遊戲視窗。
+一個用於消除紅色鼓面、一個用於消除藍色鼓面。
+鼓面會隨時間向左移動，如果抵達了目標地點，且按下相對應的按鈕則會得到分數。
+設定一個30秒的倒數計時器，如果時間到了，則遊戲終了，暫停遊戲。
+並將結果用彈出的對話是呈現，至少包含分數。
+
+螢幕截圖(Screen shot)：
+遊戲開始畫面
+https://drive.google.com/open?id=0B2umS87wt6nMTXhfM2RNSk1NWDQ
+遊戲介面01(敲擊前)
+https://drive.google.com/open?id=0B2umS87wt6nMMEJLdlpqSFlRWjQ
+遊戲介面02(敲擊後)
+https://drive.google.com/open?id=0B2umS87wt6nMQ09wN2l3Q0I5VnM
+遊戲介面03(終了時)
+https://drive.google.com/open?id=0B2umS87wt6nMRGVCdk55TjdUZkU
+
+遊戲玩法(How to play)：
+從主畫面，有四個按鍵可以點選。(目前只設計好兩個)
+左上方則由遊戲資訊可以點選，點選後會將遊戲相關資訊做說明。
+當按下開始遊戲，則會將主畫面換成遊戲介面，而點選離開則會關閉視窗結束遊戲。
+遊戲規則如同作業要求所述，唯一差別是目前的鼓面是不會消除的。
+
+程式架構(Program architecture)：
+主畫面(mainwindow)底下會有遊戲視窗與資訊視窗。
+透過開始遊戲按鍵會生成新一個遊戲視窗透過開始遊戲按鍵會生成新一個遊戲視窗(gameWindow)
+透過點選遊戲資訊的選單列，會生成一個遊戲資訊的ui，來簡單說明遊戲玩法。
+在遊戲視窗當中，玩家可以透過按鍵(F、J)來操縱遊戲。共有三十秒的遊戲時間。
+此部分的話就是透過timer發出的timeout去不斷刷新遊戲介面，來進行遊戲ui的刷新。
+而當有按鍵敲擊，則會用keyEvent去判斷，如果是敲擊F、J按鍵則會進一步去測試是否有在目標範圍內敲擊，若有加分、正確敲擊次數加1；
+反之，分數並不會增加，錯誤敲擊次數加1。分數與敲擊次數皆會在ui的lcd上面呈現。
+在30秒遊戲時間結束，則會timer2的timeout interval時間到，觸發finish將遊戲結果用對話視窗呈現。
+
+UML：(尚未完成，待修改)
+mainwindow
+Attributes
+	- mainWindow ui
+	- musicplayer
+	- gamewin
+Operations
+	-void on_actionInforPop_triggered() 
+    -void on_pushButton_clicked() 
+    -void on_actionClose_triggered() 
+	
+dialog
+Attributes
+	-dialog ui
+Operations
+	
+InformDialog
+Attributes
+	-InformDialog ui
+Operations
+
+
+gameWindow
+Attributes
+    -Ui::gameWindow *ui 
+    -int count=0 
+    -int score,originScore 
+    -int wrongHitTime 
+    -int rightHitTime 
+    -int numberOfDrum 
+    -int isIni 
+    -QPalette sample_palette 
+    -QMediaPlayer * mainMusic 
+    -QMediaPlayer * startSound 
+    -QMediaPlayer * punchsound 
+    -QImage DrumSheet 
+    -QImage P1,P2,P3 
+    -QDialog * endWindow 
+    -Dialog * finalWindow 
+    -QTimer *timer 
+    -QTimer *timer2 
+    -QTimer *mainTimer 
+    -int x 
+    -int redPox[10]
+    -int bluePox[10]
+    -bool redBeingHit[8] 
+    -bool blueBeingHit[3] 
+Operations 
+    +explicit gameWindow(QWidget *parent = 0) 
+    +void moveDrum() 
+    +~gameWindow() 
+    -void on_pushButton_clicked() 
+    -void lcdTimeChange() 
+    -void lcdScoreChange() 
+    -void finish() 
+    -void refresh() 
+    -int redHitCheck(int Pos) 
+    -int blueHitCheck(int Pos) 
+    -void keyPressEvent(QKeyEvent *) 
+    -void ini() 
+	-void restart() 
+    -void on_pushButton_2_clicked() 
+    +void hittimeChange() 
