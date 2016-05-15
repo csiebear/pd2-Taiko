@@ -16,15 +16,18 @@ TEMPLATE = app
 SOURCES += main.cpp\
         mainwindow.cpp \
     gamewindow.cpp \
-    informdialog.cpp
+    informdialog.cpp \
+    dialog.cpp
 
 HEADERS  += mainwindow.h \
     gamewindow.h \
-    informdialog.h
+    informdialog.h \
+    dialog.h
 
 FORMS    += mainwindow.ui \
     gamewindow.ui \
-    informdialog.ui
+    informdialog.ui \
+    dialog.ui
 
 RESOURCES += \
     res.qrc

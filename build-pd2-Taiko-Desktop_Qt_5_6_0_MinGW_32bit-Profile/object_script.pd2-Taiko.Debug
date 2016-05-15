@@ -1,0 +1,12 @@
+INPUT(
+./debug/main.o
+./debug/mainwindow.o
+./debug/gamewindow.o
+./debug/informdialog.o
+./debug/dialog.o
+./debug/qrc_res.o
+./debug/moc_mainwindow.o
+./debug/moc_gamewindow.o
+./debug/moc_informdialog.o
+./debug/moc_dialog.o
+);

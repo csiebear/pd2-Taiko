@@ -17,15 +17,13 @@ public:
 
 
 private slots:
-    void on_actionOpen_triggered();
-
-    void on_actionInformation_triggered();
-
+    void on_actionInforPop_triggered();
     void on_pushButton_clicked();
+    void on_actionClose_triggered();
 
 private:
     Ui::MainWindow *ui;
-    gameWindow game;
+    gameWindow * gamewin;//game ui
     QMediaPlayer * musicplayer= new QMediaPlayer;
 };
 

@@ -28,11 +28,11 @@ QT_BEGIN_NAMESPACE
 class Ui_MainWindow
 {
 public:
-    QAction *actionOpen;
-    QAction *actionInformation;
+    QAction *actionInforPop;
+    QAction *actionClose;
     QWidget *centralWidget;
     QLabel *label;
-    QWidget *widget;
+    QWidget *layoutWidget;
     QHBoxLayout *horizontalLayout;
     QPushButton *pushButton;
     QPushButton *pushButton_3;
@@ -59,25 +59,25 @@ public:
         MainWindow->setAnimated(true);
         MainWindow->setDocumentMode(true);
         MainWindow->setTabShape(QTabWidget::Rounded);
-        actionOpen = new QAction(MainWindow);
-        actionOpen->setObjectName(QStringLiteral("actionOpen"));
-        actionInformation = new QAction(MainWindow);
-        actionInformation->setObjectName(QStringLiteral("actionInformation"));
+        actionInforPop = new QAction(MainWindow);
+        actionInforPop->setObjectName(QStringLiteral("actionInforPop"));
+        actionClose = new QAction(MainWindow);
+        actionClose->setObjectName(QStringLiteral("actionClose"));
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
         label = new QLabel(centralWidget);
         label->setObjectName(QStringLiteral("label"));
         label->setGeometry(QRect(1, 0, 480, 320));
         label->setPixmap(QPixmap(QString::fromUtf8(":/pic/pic/StartMenu.jpg")));
-        widget = new QWidget(centralWidget);
-        widget->setObjectName(QStringLiteral("widget"));
-        widget->setGeometry(QRect(0, 320, 481, 31));
-        horizontalLayout = new QHBoxLayout(widget);
+        layoutWidget = new QWidget(centralWidget);
+        layoutWidget->setObjectName(QStringLiteral("layoutWidget"));
+        layoutWidget->setGeometry(QRect(0, 320, 481, 31));
+        horizontalLayout = new QHBoxLayout(layoutWidget);
         horizontalLayout->setSpacing(6);
         horizontalLayout->setContentsMargins(11, 11, 11, 11);
         horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
         horizontalLayout->setContentsMargins(0, 0, 0, 0);
-        pushButton = new QPushButton(widget);
+        pushButton = new QPushButton(layoutWidget);
         pushButton->setObjectName(QStringLiteral("pushButton"));
         QFont font;
         font.setFamily(QString::fromUtf8("\345\276\256\350\273\237\346\255\243\351\273\221\351\253\224"));
@@ -88,26 +88,25 @@ public:
 
         horizontalLayout->addWidget(pushButton);
 
-        pushButton_3 = new QPushButton(widget);
+        pushButton_3 = new QPushButton(layoutWidget);
         pushButton_3->setObjectName(QStringLiteral("pushButton_3"));
         pushButton_3->setFont(font);
 
         horizontalLayout->addWidget(pushButton_3);
 
-        pushButton_2 = new QPushButton(widget);
+        pushButton_2 = new QPushButton(layoutWidget);
         pushButton_2->setObjectName(QStringLiteral("pushButton_2"));
         pushButton_2->setFont(font);
 
         horizontalLayout->addWidget(pushButton_2);
 
-        pushButton_4 = new QPushButton(widget);
+        pushButton_4 = new QPushButton(layoutWidget);
         pushButton_4->setObjectName(QStringLiteral("pushButton_4"));
         pushButton_4->setFont(font);
 
         horizontalLayout->addWidget(pushButton_4);
 
         MainWindow->setCentralWidget(centralWidget);
-        label->raise();
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QStringLiteral("menuBar"));
         menuBar->setGeometry(QRect(0, 0, 480, 22));
@@ -119,8 +118,8 @@ public:
         MainWindow->addToolBar(Qt::TopToolBarArea, mainToolBar);
 
         menuBar->addAction(menuOpen_Close->menuAction());
-        menuOpen_Close->addAction(actionOpen);
-        menuOpen_Close->addAction(actionInformation);
+        menuOpen_Close->addAction(actionInforPop);
+        menuOpen_Close->addAction(actionClose);
 
         retranslateUi(MainWindow);
         QObject::connect(pushButton_4, SIGNAL(clicked()), MainWindow, SLOT(close()));
@@ -132,8 +131,8 @@ public:
     void retranslateUi(QMainWindow *MainWindow)
     {
         MainWindow->setWindowTitle(QApplication::translate("MainWindow", "Taiko", 0));
-        actionOpen->setText(QApplication::translate("MainWindow", "Open", 0));
-        actionInformation->setText(QApplication::translate("MainWindow", "Information", 0));
+        actionInforPop->setText(QApplication::translate("MainWindow", "\351\201\212\346\210\262\350\263\207\350\250\212", 0));
+        actionClose->setText(QApplication::translate("MainWindow", "\351\233\242\351\226\213\351\201\212\346\210\262", 0));
         label->setText(QString());
         pushButton->setText(QApplication::translate("MainWindow", "\351\226\213\345\247\213\351\201\212\346\210\262", 0));
         pushButton_3->setText(QApplication::translate("MainWindow", "\351\201\212\346\210\262\350\250\255\345\256\232", 0));

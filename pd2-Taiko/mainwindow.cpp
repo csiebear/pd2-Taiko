@@ -1,9 +1,7 @@
 #include <QMediaPlayer>
-#include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include "mainwindow.h"
 #include "informdialog.h"
-#include "gamewindow.h"
-#include "ui_gamewindow.h"
 #include "gamewindow.h"
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -21,12 +19,7 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-void MainWindow::on_actionOpen_triggered()
-{
-
-}
-
-void MainWindow::on_actionInformation_triggered()
+void MainWindow::on_actionInforPop_triggered()
 {
     //Create an QDialog object
     InformDialog oDialog;
@@ -38,8 +31,15 @@ void MainWindow::on_actionInformation_triggered()
 
 void MainWindow::on_pushButton_clicked()
 {
+    //if we click the start button,then hide the mainwindow and stop the background sound
     this->hide();
     musicplayer->stop();
-    //gameWindow *game= new gameWindow;
-    this->game.show();
+    //create the new game window and show it
+    gamewin= new gameWindow;
+    this->gamewin->show();
+}
+
+void MainWindow::on_actionClose_triggered()
+{
+    this->close();
 }

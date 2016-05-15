@@ -63,7 +63,7 @@
      <pixmap resource="res.qrc">:/pic/pic/StartMenu.jpg</pixmap>
     </property>
    </widget>
-   <widget class="QWidget" name="">
+   <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
       <x>0</x>
@@ -135,8 +135,6 @@
      </item>
     </layout>
    </widget>
-   <zorder>label</zorder>
-   <zorder>layoutWidget</zorder>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
@@ -151,8 +149,8 @@
     <property name="title">
      <string>Open/Close</string>
     </property>
-    <addaction name="actionOpen"/>
-    <addaction name="actionInformation"/>
+    <addaction name="actionInforPop"/>
+    <addaction name="actionClose"/>
    </widget>
    <addaction name="menuOpen_Close"/>
   </widget>
@@ -164,14 +162,14 @@
     <bool>false</bool>
    </attribute>
   </widget>
-  <action name="actionOpen">
+  <action name="actionInforPop">
    <property name="text">
-    <string>Open</string>
+    <string>遊戲資訊</string>
    </property>
   </action>
-  <action name="actionInformation">
+  <action name="actionClose">
    <property name="text">
-    <string>Information</string>
+    <string>離開遊戲</string>
    </property>
   </action>
  </widget>

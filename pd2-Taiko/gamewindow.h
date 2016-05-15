@@ -2,11 +2,11 @@
 #define GAMEWINDOW_H
 
 #include <QImage>
+#include <QDialog>
 #include <QWidget>
 #include <QMediaPlayer>
 #include <QLabel>
-#include <QGraphicsView>
-#include <QGraphicsScene>
+#include "dialog.h"
 
 namespace Ui {
 class gameWindow;
@@ -28,6 +28,8 @@ private slots:
     void lcdScoreChange();
     void finish();
     void refresh();
+    void redHitCheck(int Pos);
+    void blueHitCheck(int Pos);
     void keyPressEvent(QKeyEvent *);
     void ini();
 signals:
@@ -44,11 +46,20 @@ private:
     void showTheDrum();
     void moveTheDrum();
     void setDrum();
+    QPalette sample_palette;
     QMediaPlayer * mainMusic;
+    QMediaPlayer * startSound;
     QMediaPlayer * punchsound;
-    QImage BlueDrum;
-    QImage RedDrum;
-    int xpox[30];
+    QImage DrumSheet;
+    QImage P1,P2,P3;//The QImage for loading the picture of the Taikoman
+    QDialog * endWindow;
+    Dialog * finalWindow;
+    QTimer *timer;//the timer for changing the ui 100ms
+    QTimer *timer2;//the timer for stop the game and show the final dialog
+    QTimer *mainTimer;//the timer will show in the lcd and it start when we create the gamewindow ui
+    int x;
+    int redPox[];
+    int bluePox[];
 };
 
 #endif // GAMEWINDOW_H

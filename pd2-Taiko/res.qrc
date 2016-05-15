@@ -1,10 +1,15 @@
 <RCC>
     <qresource prefix="/pic">
-        <file>pic/Drum1.jpg</file>
-        <file>pic/Drum2.jpg</file>
         <file>pic/GameBackDrum.jpg</file>
         <file>pic/GameBackGround.jpg</file>
         <file>pic/StartMenu.jpg</file>
+        <file>pic/DrumLine.png</file>
+        <file>pic/P1.png</file>
+        <file>pic/P2.png</file>
+        <file>pic/P3.png</file>
+        <file>pic/Drum2.jpg</file>
+        <file>pic/Drum1.jpg</file>
+        <file>pic/hitdrum.png</file>
     </qresource>
     <qresource prefix="/sound">
         <file>sound/background.mp3</file>

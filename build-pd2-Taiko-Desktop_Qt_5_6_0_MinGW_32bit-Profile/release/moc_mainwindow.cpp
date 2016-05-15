@@ -20,7 +20,7 @@
 QT_BEGIN_MOC_NAMESPACE
 struct qt_meta_stringdata_MainWindow_t {
     QByteArrayData data[5];
-    char stringdata0[89];
+    char stringdata0[87];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -30,15 +30,14 @@ struct qt_meta_stringdata_MainWindow_t {
 static const qt_meta_stringdata_MainWindow_t qt_meta_stringdata_MainWindow = {
     {
 QT_MOC_LITERAL(0, 0, 10), // "MainWindow"
-QT_MOC_LITERAL(1, 11, 23), // "on_actionOpen_triggered"
-QT_MOC_LITERAL(2, 35, 0), // ""
-QT_MOC_LITERAL(3, 36, 30), // "on_actionInformation_triggered"
-QT_MOC_LITERAL(4, 67, 21) // "on_pushButton_clicked"
+QT_MOC_LITERAL(1, 11, 27), // "on_actionInforPop_triggered"
+QT_MOC_LITERAL(2, 39, 0), // ""
+QT_MOC_LITERAL(3, 40, 21), // "on_pushButton_clicked"
+QT_MOC_LITERAL(4, 62, 24) // "on_actionClose_triggered"
 
     },
-    "MainWindow\0on_actionOpen_triggered\0\0"
-    "on_actionInformation_triggered\0"
-    "on_pushButton_clicked"
+    "MainWindow\0on_actionInforPop_triggered\0"
+    "\0on_pushButton_clicked\0on_actionClose_triggered"
 };
 #undef QT_MOC_LITERAL
 
@@ -74,9 +73,9 @@ void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         MainWindow *_t = static_cast<MainWindow *>(_o);
         Q_UNUSED(_t)
         switch (_id) {
-        case 0: _t->on_actionOpen_triggered(); break;
-        case 1: _t->on_actionInformation_triggered(); break;
-        case 2: _t->on_pushButton_clicked(); break;
+        case 0: _t->on_actionInforPop_triggered(); break;
+        case 1: _t->on_pushButton_clicked(); break;
+        case 2: _t->on_actionClose_triggered(); break;
         default: ;
         }
     }
