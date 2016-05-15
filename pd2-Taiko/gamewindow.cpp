@@ -63,9 +63,10 @@ void gameWindow::refresh()
 
 void gameWindow::lcdTimeChange()
 {
-
+    //modify the timer to countdown at 5/15 11:12
+    //the total game the time is 30 sec,so I use the 30 minus the time elapsed
     count++;
-    ui->lcd_timeboard->display(count/10);
+    ui->lcd_timeboard->display(30-count/10);
 }
 
 void gameWindow::lcdScoreChange()
@@ -95,7 +96,7 @@ void gameWindow::ini()
 {
 
     isIni=1;
-    x=150;//the DrumLine starting position x at the 100 pixel
+    x=rand()%200+150;//the DrumLine starting position x is randomly decided
     timer = new QTimer(this);
     timer2 = new QTimer(this);
     QDateTime startTime=QDateTime::currentDateTime();
@@ -151,7 +152,7 @@ void gameWindow::restart()
     mainTimer->start(100);
 
     isIni=1;
-    x=150;//the DrumLine starting position x at the 100 pixel
+    x=rand()%200+150;
     timer = new QTimer(this);
     timer2 = new QTimer(this);
     QDateTime startTime=QDateTime::currentDateTime();
